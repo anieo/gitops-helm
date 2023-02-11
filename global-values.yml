@@ -19,12 +19,12 @@ fluent:
   version: v1.7.0
   repo: https://github.com/fluent/fluent-operator/
   path: charts/fluent-operator
-keycloak:
-  name: keycloak-operator
-  namespace: keycloak
-  version: main
-  repo: https://github.com/anieo/gitops-helm.git
-  path: charts/keycloak-operator
+# keycloak:
+#   name: keycloak-operator
+#   namespace: keycloak
+#   version: main
+#   repo: https://github.com/anieo/gitops-helm.git
+#   path: charts/keycloak-operator
 zookeeper:
   name: zookeeper
   namespace: zookeeper
@@ -172,12 +172,12 @@ solutions:
         configs:
           partitions: 1
           replicas: 1
-  keycloak:
-    name: keycloak-clusters
-    namespace: keycloak
-    path: charts/keycloak-configs
-    configs:
-      keycloak:
+  # keycloak:
+  #   name: keycloak-clusters
+  #   namespace: keycloak
+  #   path: charts/keycloak-configs
+  #   configs:
+  #     keycloak:
 
 
   # vector:
