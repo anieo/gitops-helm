@@ -1,0 +1,1 @@
+kubectl port-forward -n argocd service/argo-cd-argocd-server 8443:443

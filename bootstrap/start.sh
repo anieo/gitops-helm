@@ -8,7 +8,7 @@ cd $SCRIPT_DIR
 kubectl create namespace argocd
 # kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 helm repo add argo https://argoproj.github.io/argo-helm
-helm upgrade --install arg-cd argo/argo-cd -n argocd -f $SCRIPT_DIR/argo-values.yml 
+helm upgrade --install argo-cd argo/argo-cd -n argocd -f $SCRIPT_DIR/argo-values.yml 
 
 #argocd github ssh secret
 

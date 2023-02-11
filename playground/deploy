@@ -1,16 +1,16 @@
 #! /bin/bash
 Green='\033[0;32m'
 NC='\033[0m' 
-WDir='/home/ali/work/fatura/logging/local/old/playground'
+WDir='/home/ali/study/gitops-helm/playground'
 
 echo -e "${Green}Starting Kind Cluster${NC}"
 cd "${WDir}" || exit
-kind create cluster --name k8s-playground --config "./kind-config.yaml"
+kind create cluster --name argocd --config "./kind-config.yaml"
 
 echo -e "${Green}deploying test nodes${NC}"
-kubectl create ns monitoring 
-kubectl create ns http
-kubectl create ns nginx
-kubectl apply -f application/
-kubectl port-forward service/httpd-service 8080:80
+# kubectl create ns monitoring 
+# kubectl create ns http
+# kubectl create ns nginx
+# kubectl apply -f application/
+# kubectl port-forward service/httpd-service 8080:80
 # while true; do curl http://localhost:8080;sleep 1; curl  http://localhost:8080/test ;done
