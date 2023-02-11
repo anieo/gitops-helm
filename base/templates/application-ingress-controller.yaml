@@ -92,7 +92,7 @@
         #     configMapName: ""
         #     configMapKey: ""
 
-        #   service:
+          service:
         #     enabled: true
 
         #     appProtocol: true
@@ -110,7 +110,7 @@
         #     targetPorts:
         #       http: http
         #       https: https
-        #     type: LoadBalancer
+            type: ClusterIP
 
         #     nodePorts:
         #       http: ""

@@ -19,6 +19,12 @@ configs:
             hs = {}
             hs.status = "Healthy"
             return hs
+      networking.k8s.io/Ingress:
+          health.lua: |
+            hs = {}
+            hs.status = "Healthy"
+            return hs
+
 # server:
 #   # autoscaling:
 #   #   enabled: true
