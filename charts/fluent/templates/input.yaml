@@ -1,0 +1,22 @@
+---
+apiVersion: fluentbit.fluent.io/v1alpha2
+kind: ClusterInput
+metadata:
+  name: tail
+  labels:
+    fluentbit.fluent.io/enabled: "true"
+    fluentbit.fluent.io/component: logging
+spec:
+  tail:
+    tag: kube.*
+    {{- with .Values.fluentbit.inputs }}
+    {{ $local := dict "first" true -}}
+    path: {{ range $k, $v := $.Values.fluentbit.inputs -}}{{- if not $local.first -}},{{- end -}}/var/log/containers/*-{{- $v -}}-*.log{{- $_ := set $local "first" false -}}{{- end -}}
+    {{ end }}
+    parser: docker
+    refreshIntervalSeconds: 10
+    memBufLimit: 5MB
+    skipLongLines: true
+    db: /fluent-bit/tail/pos.db
+    dbSync: Normal
+---

@@ -1,0 +1,11 @@
+{{- with .Values -}}
+{{- range $cluster, $value := $.Values }}
+apiVersion: "zookeeper.pravega.io/v1beta1"
+kind: "ZookeeperCluster"
+metadata:
+  name: {{$cluster}}
+  namespace: {{$value.namespace | default "zookeeper"}}
+spec:
+{{toYaml $value.spec | indent 2}}
+{{- end -}}
+{{- end -}}

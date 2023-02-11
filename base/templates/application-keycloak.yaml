@@ -1,0 +1,3 @@
+{{- template "application" $.Values.keycloak }}
+      # values: |
+      #     replicaCount:

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-curl
+  namespace: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-curl
+  template:
+    metadata:
+      annotations:
+        prometheus.io/probe: "true"
+      labels:
+        app: nginx-curl
+    spec:
+      # nodeSelector:
+      #   node: monitoring
+      containers:
+      - name: nginx-curl
+        image: alpine/curl
+        args: [/bin/sh, -c, 'while true; do curl -s http://nginx-service:80 @> /dev/null; curl -s http://nginx-service:80/test @> /dev/null;done']
+
+      
+
+

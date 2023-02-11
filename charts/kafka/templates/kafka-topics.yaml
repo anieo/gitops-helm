@@ -1,0 +1,20 @@
+{{- with .Values -}}
+{{- range $cluster, $value := $.Values }}
+  {{- with $value.topics -}}
+  {{- range $topic := $value.topics }}
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    strimzi.io/cluster: {{ $cluster }}
+  name: {{ $topic }}
+  namespace: {{$value.namespace | default "kafka"}}
+spec: 
+  {{- range $key, $val := $value.configs }}
+  {{ $key }}: {{   print $val  }}
+  {{- end}}
+---
+  {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- end -}}

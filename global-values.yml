@@ -1,0 +1,211 @@
+domain: example.com
+
+strimzi:
+  name: strimzi
+  namespace: kafka
+  version: 0.32.0
+  repo: https://strimzi.io/charts
+  chart: strimzi-kafka-operator
+ingress_controller:
+  name: ingress-nginx
+  namespace: ingress-nginx
+  version: 4.4.2
+  repo: https://kubernetes.github.io/ingress-nginx
+  chart: ingress-nginx
+  subdomain: do
+fluent:
+  name: fluent-operator
+  namespace: fluent
+  version: v1.7.0
+  repo: https://github.com/fluent/fluent-operator/
+  path: charts/fluent-operator
+keycloak:
+  name: keycloak-operator
+  namespace: keycloak
+  version: main
+  repo: https://github.com/anieo/gitops-helm.git
+  path: charts/keycloak-operator
+zookeeper:
+  name: zookeeper
+  namespace: zookeeper
+  version: 0.2.13
+  repo: https://charts.pravega.io
+  chart: zookeeper-operator
+
+druid:
+  name: druid
+  namespace: druid
+  version: druid-operator-0.0.9
+  repo: https://github.com/druid-io/druid-operator/
+  path: chart
+
+kafka_ui:
+  name: kafka-ui
+  namespace: kafka
+  create_namespace: false
+  version: 0.5.1
+  repo: https://provectus.github.io/kafka-ui
+  chart: kafka-ui
+  subdomain: kafka
+  credentials:
+    username: kafka
+    password: C9LbiEwd4RzfvAiXrnBFvwMepokV9k2p
+
+
+# cert_manager:
+#   name: cert-manager
+#   namespace: cert-manager
+#   version: v1.10.1
+#   repo: https://charts.jetstack.io
+#   chart: cert-manager
+
+victoria_metrics:
+  name: victoria-metrics
+  namespace: victoria-metrics
+  version: 0.17.2
+  repo: https://victoriametrics.github.io/helm-charts/
+  chart: victoria-metrics-operator
+
+opensearch:
+  name: opensearch-operator
+  namespace: opensearch-operator
+  version: 2.2.0
+  repo: https://opster.github.io/opensearch-k8s-operator/
+  chart: opensearch-operator
+grafana:
+  name: grafana-operator
+  namespace: grafana-operator
+  version: 20.0.5
+  repo: https://charts.bitnami.com/bitnami/
+  chart: kafka
+telegraf:
+  name: telegraf-operator
+  namespace: telegraf-operator
+  version: 1.3.10
+  repo: https://helm.influxdata.com/
+  chart: telegraf-operator
+vector:
+  name: vector
+  namespace: vector
+  version: 0.19.0
+  repo: https://helm.vector.dev/
+  chart: vector
+  sources:
+    logs:
+      type: demo_logs
+      format: shuffle
+      lines:
+        - "Line 1"
+        - "Line 2"
+      condition:
+        type: "vrl"
+        source: ".status == 500"
+    kube_logs:
+      type: kubernetes_logs
+      ignore_older_secs: 600
+      read_from: beginning
+      self_node_name: ${VECTOR_SELF_NODE_NAME}
+      exclude_paths_glob_patterns:
+        - "**/exclude/**"
+      extra_field_selector: metadata.name!=pod-name-to-exclude
+      extra_label_selector: my_custom_label!=my_value
+      extra_namespace_label_selector: my_custom_label!=my_val
+  services:
+    - name: logs
+      format: json # json | text
+      topic: vector-logs-1
+      sources:
+        - logs
+        - kube_logs
+solutions:
+  zookeeper:
+    name: zookeeper
+    namespace: zookeeper
+    path: charts/zookeeper
+    configs:
+      druid-zookeeper:
+        namespace: druid
+        spec:
+          replicas: 3
+
+  fluent:
+    name: fluent
+    namespace: fluent
+    path: charts/fluent #poorly done chart need automation
+    configs:
+      fluentbit:
+        namespace: fluent
+        inputs:
+          - argocd
+          - druid
+        output:
+          kafka:
+            cluster: test
+            topic: ks-log
+  # cert_manager_issuer:
+  #   name: cert-manager-issuer
+  #   namespace: cert-manager
+  #   path: charts/cert-manager-issuers #poorly done chart need automation
+  #   configs:
+  #     email: certs@test.io
+  #     name: letsencrypt-prod
+  druid:
+    name: druid
+    namespace: druid
+    path: charts/druid #poorly done chart need automation
+    configs:
+      druid:
+        domain: druid.qubinets.cloud
+        zookeeper: druid-zookeeper
+
+  kafka:
+    name: kafka-clusters
+    namespace: kafka
+    path: charts/kafka
+    configs:
+      test:
+        topics:
+          - ks-log
+          - vector-logs-1
+          - vector-logs-2
+          - vector-logs-3
+        configs:
+          partitions: 1
+          replicas: 1
+  keycloak:
+    name: keycloak-clusters
+    namespace: keycloak
+    path: charts/keycloak-configs
+    configs:
+      keycloak:
+
+
+  # vector:
+  #   auto: false
+  #   sources:
+  #     logs:
+  #       type: demo_logs
+  #       format: shuffle
+  #       lines:
+  #         - "Line 1"
+  #         - "Line 2"
+  #       condition:
+  #         type: "vrl"
+  #         source: ".status == 500"
+  #     kube_logs:
+  #       type: kubernetes_logs
+  #       ignore_older_secs: 600
+  #       read_from: beginning
+  #       self_node_name: ${VECTOR_SELF_NODE_NAME}
+  #       exclude_paths_glob_patterns:
+  #         - "**/exclude/**"
+  #       extra_field_selector: metadata.name!=pod-name-to-exclude
+  #       extra_label_selector: my_custom_label!=my_value
+  #       extra_namespace_label_selector: my_custom_label!=my_val
+  #   services:
+  #     - name: logs
+  #       format: json # json | text
+  #       topic: vector-logs-1
+  #       sources:
+  #         - logs
+  #         - kube_logs

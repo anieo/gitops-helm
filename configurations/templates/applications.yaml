@@ -1,0 +1,7 @@
+{{- with .Values.solutions -}}
+{{- range $cluster, $value := $.Values.solutions }}
+{{- if or (eq $value.auto nil) (eq $value.auto true) }}
+{{- template "application" $value }}
+{{- end -}}
+{{- end -}}
+{{- end -}}

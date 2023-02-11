@@ -1,0 +1,3 @@
+{{- template "application" $.Values.druid }}
+      # values: |
+      #     replicaCount:

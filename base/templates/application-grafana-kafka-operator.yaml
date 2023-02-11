@@ -1,0 +1,2 @@
+{{- template "application" $.Values.grafana }}
+      # values: |

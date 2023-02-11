@@ -1,0 +1,6 @@
+apiVersion: v2
+name: solution
+description: A Helm chart for solution argocd applications
+type: application
+version: 0.1.0
+appVersion: "1.16.0"
