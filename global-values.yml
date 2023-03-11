@@ -91,7 +91,7 @@ vector:
   repo: https://helm.vector.dev/
   chart: vector
   sources:
-    s_logs:
+    demologs:
       type: demo_logs
       format: shuffle
       lines:
