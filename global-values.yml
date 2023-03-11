@@ -91,7 +91,7 @@ vector:
   repo: https://helm.vector.dev/
   chart: vector
   sources:
-    demologs:
+    logs:
       type: demo_logs
       format: shuffle
       lines:
@@ -111,7 +111,7 @@ vector:
       extra_label_selector: my_custom_label!=my_value
       extra_namespace_label_selector: my_custom_label!=my_val
   services:
-    - name: kafka
+    - name: logs
       format: json # json | text
       topic: vector-logs-1
       sources:
