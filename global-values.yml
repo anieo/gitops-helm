@@ -52,12 +52,12 @@ kafka_ui:
     password: C9LbiEwd4RzfvAiXrnBFvwMepokV9k2p
 
 
-# cert_manager:
-#   name: cert-manager
-#   namespace: cert-manager
-#   version: v1.10.1
-#   repo: https://charts.jetstack.io
-#   chart: cert-manager
+cert_manager:
+  name: cert-manager
+  namespace: cert-manager
+  version: v1.10.1
+  repo: https://charts.jetstack.io
+  chart: cert-manager
 
 victoria_metrics:
   name: victoria-metrics
