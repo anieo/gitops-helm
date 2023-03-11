@@ -1,3 +1,4 @@
+{{- template "application" $.Values.cert_manager }}
 
 #       values: |
 #           installCRDs: true
