@@ -111,7 +111,7 @@ vector:
       extra_label_selector: my_custom_label!=my_value
       extra_namespace_label_selector: my_custom_label!=my_val
   services:
-    - name: logs
+    - name: kafka
       format: json # json | text
       topic: vector-logs-1
       sources:
