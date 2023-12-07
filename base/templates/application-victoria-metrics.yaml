@@ -1,4 +1,0 @@
-{{- template "application" $.Values.victoria_metrics }}
-      values: |
-        rbac:
-            pspEnabled: false

@@ -1,4 +1,0 @@
-{{- template "application" $.Values.fluent }}
-      values: |
-          kubernetes: true
-          containerRuntime: docker

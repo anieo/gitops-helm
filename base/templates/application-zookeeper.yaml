@@ -1,3 +1,0 @@
-{{- template "application" $.Values.zookeeper }}
-      # values: |
-      #     replicaCount:
