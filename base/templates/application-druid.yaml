@@ -3,21 +3,21 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: handbook
+  name: namespaced
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: guestbook
-  namespace: argocd
+  name: namespaced
+  namespace: namespaced
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: argocd
+    namespace: namespaced
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
-    path: guestbook
+    path: namespaced
     repoURL: https://github.com/argoproj/argocd-example-apps
     targetRevision: HEAD
