@@ -16,7 +16,7 @@ spec:
   destination:
     namespace: namespaced
     server: https://kubernetes.default.svc
-  project: default
+  project: base
   source:
     path: namespaced
     repoURL: https://github.com/argoproj/argocd-example-apps
