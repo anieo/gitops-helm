@@ -15,7 +15,7 @@ metadata:
 spec:
   destination:
     namespace: namespaced
-    server: {{ .Values.spec.destination.server }}
+    server: https://kubernetes.default.svc
   project: default
   source:
     path: namespaced
