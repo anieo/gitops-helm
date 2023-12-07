@@ -15,7 +15,7 @@ spec:
   destination:
     namespace: namespaced
     server: https://kubernetes.default.svc
-  project: base
+  project: child
   source:
     path: helm-guestbook
     repoURL: https://github.com/argoproj/argocd-example-apps

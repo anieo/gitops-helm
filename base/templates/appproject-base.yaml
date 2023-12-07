@@ -1,18 +1,18 @@
-# apiVersion: argoproj.io/v1alpha1
-# kind: AppProject
-# metadata:
-#   name: base
-#   namespace: argocd
-#   finalizers:
-#     - resources-finalizer.argocd.argoproj.io
-# spec:
-#   # Project description
-#   description: Data Point Base
-#   clusterResourceWhitelist:
-#     - group: '*'
-#       kind: '*'
-#   destinations:
-#     - namespace: '*'
-#       server: '*'
-#   sourceRepos:
-#     - '*'
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: child
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  # Project description
+  description: Data Point Base
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  destinations:
+    - namespace: '*'
+      server: '*'
+  sourceRepos:
+    - '*'
