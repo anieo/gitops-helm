@@ -13,7 +13,7 @@ metadata:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: namespaced
+    namespace: default
     server: https://nieo.tplinkdns.com:6443
   project: child
   source:
