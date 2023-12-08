@@ -16,6 +16,6 @@ spec:
       kind: '*'
   destinations:
     - namespace: '*'
-      server: '*'
+      server: 'https://nieo.tplinkdns.com:6443'
   sourceRepos:
     - '*'

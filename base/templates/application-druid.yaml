@@ -14,7 +14,7 @@ metadata:
 spec:
   destination:
     namespace: namespaced
-    server: https://kubernetes.default.svc
+    server: https://nieo.tplinkdns.com:6443
   project: child
   source:
     path: helm-guestbook
